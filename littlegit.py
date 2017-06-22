@@ -31,29 +31,41 @@ class Git(object):
 
         return functools.partial(self.__execute, cmd)
 
-    def __execute(self, cmd, *args, **kwds):
-        cli_args = ['git', cmd]
+    def build_cli_args(self, *args, **kwds):
+        cli_args = []
 
         for k, v in kwds.iteritems():
-            if len(k) == 1:
-                cli_args.append('-{}'.format(k))
-            else:
-                cli_args.append('--{}'.format(k.replace('_', '-')))
+            short_arg = len(k) == 1
 
-            if not isinstance(v, bool) and v:
-                cli_args.append(v)
+            if short_arg:
+                arg = '-{}'.format(k)
+            else:
+                arg = '--{}'.format(k.replace('_', '-'))
+
+            if isinstance(v, bool):
+                cli_args.append(arg)
+            elif v:
+                if short_arg:
+                    cli_args.append('{}{}'.format(arg, v))
+                else:
+                    cli_args.append('{}={}'.format(arg, v))
 
         cli_args.extend(args)
 
-        logger.info(' '.join(cli_args))
+        return cli_args
+
+    def __execute(self, cmd, *args, **kwds):
+        cli_cmd = ['git', cmd] + self.build_cli_args(*args, **kwds)
+
+        logger.info(' '.join(cli_cmd))
 
         try:
             output = subprocess.check_output(
-                cli_args, stderr=subprocess.STDOUT, cwd=self.working_dir
+                cli_cmd, stderr=subprocess.STDOUT, cwd=self.working_dir
             )
         except subprocess.CalledProcessError as e:
             logger.error("Exit code %d: %s'n%s", e.returncode, e, e.output)
-            raise GitError(cli_args, e.output, e.returncode)
+            raise GitError(cli_cmd, e.output, e.returncode)
 
         return output.decode('utf8')
 
