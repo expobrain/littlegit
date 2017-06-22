@@ -51,3 +51,15 @@ All the methods return the output if the Git command:
     print(output)
     origin/HEAD -> origin/master
     origin/master
+
+
+Tests
+-----
+
+To run the unit tests install the development dependencies and then run
+`Tox <https://tox.readthedocs.io>`_:
+
+.. code-block:: bash
+
+    pip install -r requirements-dev.txt
+    tox
