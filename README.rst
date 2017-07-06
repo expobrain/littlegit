@@ -16,7 +16,7 @@ Install Littlegit with `pip`:
 
 .. code-block:: python
 
-    pip install littlepip
+    pip install littlegit
 
 
 Usage
