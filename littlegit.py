@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function, division, absolute_import
 
 import subprocess
 import functools
@@ -34,7 +34,7 @@ class Git(object):
     def build_cli_args(self, *args, **kwds):
         cli_args = []
 
-        for k, v in kwds.iteritems():
+        for k, v in kwds.items():
             short_arg = len(k) == 1
 
             if short_arg:
