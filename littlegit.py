@@ -1,11 +1,11 @@
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function, division, absolute_import
 
 import subprocess
 import functools
 import logging
 
 
-__version__ = '0.1.1'
+__version__ = "0.1.1"
 
 
 logger = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class GitError(Exception):
 
-    __slots__ = ['cli_args', 'output', 'exit_code']
+    __slots__ = ["cli_args", "output", "exit_code"]
 
     def __init__(self, cli_args, output, exit_code):
         self.cli_args = cli_args
@@ -22,42 +22,41 @@ class GitError(Exception):
 
 
 class Git(object):
-
     def __init__(self, working_dir):
         self.working_dir = working_dir
 
     def __getattr__(self, attr):
-        cmd = attr.replace('_', '-')
+        cmd = attr.replace("_", "-")
 
         return functools.partial(self.__execute, cmd)
 
     def build_cli_args(self, *args, **kwds):
         cli_args = []
 
-        for k, v in kwds.iteritems():
+        for k, v in kwds.items():
             short_arg = len(k) == 1
 
             if short_arg:
-                arg = '-{}'.format(k)
+                arg = "-{}".format(k)
             else:
-                arg = '--{}'.format(k.replace('_', '-'))
+                arg = "--{}".format(k.replace("_", "-"))
 
             if isinstance(v, bool):
                 cli_args.append(arg)
             elif v:
                 if short_arg:
-                    cli_args.append('{}{}'.format(arg, v))
+                    cli_args.append("{}{}".format(arg, v))
                 else:
-                    cli_args.append('{}={}'.format(arg, v))
+                    cli_args.append("{}={}".format(arg, v))
 
         cli_args.extend(args)
 
         return cli_args
 
     def __execute(self, cmd, *args, **kwds):
-        cli_cmd = ['git', cmd] + self.build_cli_args(*args, **kwds)
+        cli_cmd = ["git", cmd] + self.build_cli_args(*args, **kwds)
 
-        logger.info(' '.join(cli_cmd))
+        logger.info(" ".join(cli_cmd))
 
         try:
             output = subprocess.check_output(
@@ -67,7 +66,7 @@ class Git(object):
             logger.error("Exit code %d: %s'n%s", e.returncode, e, e.output)
             raise GitError(cli_cmd, e.output, e.returncode)
 
-        return output.decode('utf8')
+        return output.decode("utf8")
 
     def init(self, **kwds):
-        return self.__execute('init', self.working_dir, **kwds)
+        return self.__execute("init", self.working_dir, **kwds)
