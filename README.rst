@@ -62,4 +62,4 @@ To run the unit tests install the development dependencies and then run
 .. code-block:: bash
 
     pip install -r requirements-dev.txt
-    tox
+    pytest tests.py
