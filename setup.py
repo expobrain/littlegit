@@ -6,13 +6,13 @@ from littlegit import __version__
 
 
 setup(
-    name='littlegit',
-    description='This is a little tiny wrapper around Git CLI',
+    name="littlegit",
+    description="This is a little tiny wrapper around Git CLI",
     long_description=open("README.rst").read(),
-    url='https://github.com/expobrain/littlegit',
-    author='Daniele Esposti',
-    author_email='daniele.esposti@gmail.com',
-    py_modules=['littlegit'],
+    url="https://github.com/expobrain/littlegit",
+    author="Daniele Esposti",
+    author_email="daniele.esposti@gmail.com",
+    py_modules=["littlegit"],
     version=__version__,
     license=open("LICENSE").read(),
     classifiers=[
@@ -24,6 +24,6 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: System",
         "Topic :: Internet",
-        "Topic :: Software Development :: Libraries"
-    ]
+        "Topic :: Software Development :: Libraries",
+    ],
 )
