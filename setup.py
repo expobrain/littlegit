@@ -9,8 +9,8 @@ from littlegit import __version__
 setup(
     name="littlegit",
     description="This is a little tiny wrapper around Git CLI",
-    long_description=Path("README.md").read_text(),
-    long_description_content_type="text/markdown",
+    # long_description=Path("README.md").read_text(),
+    # long_description_content_type="text/markdown",
     url="https://github.com/expobrain/littlegit",
     author="Daniele Esposti",
     author_email="daniele.esposti@gmail.com",
