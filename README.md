@@ -50,6 +50,6 @@ origin/master
 To run the unit tests install the development dependencies and then run [PyTest](https://pytest.org/):
 
 ```
-pip install -r requirements-dev.txt
+pip install -r requirements_dev.txt
 pytest tests.py
 ```
