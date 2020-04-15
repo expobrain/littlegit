@@ -1,2 +1,4 @@
--r requirements_dev.txt
-black>=18.9b0
+-e .
+black>=19.10b0
+isort>=4.3.21
+pytest>=5.4.1

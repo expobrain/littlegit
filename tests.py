@@ -1,12 +1,11 @@
-from __future__ import unicode_literals, print_function, division, absolute_import
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from unittest import TestCase
 import os
-import subprocess
 import shutil
+import subprocess
 
 from littlegit import Git
-
 
 TEST_REPO_DIR = os.path.join(os.path.dirname(__file__), "__test_repo__")
 

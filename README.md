@@ -1,4 +1,4 @@
-# Littlegit
+# Littlegit
 
 A very little Python wrapper around Git CLI.
 
@@ -45,20 +45,11 @@ origin/HEAD -> origin/master
 origin/master
 ```
 
-## Tests
+## Tests
 
 To run the unit tests install the development dependencies and then run [PyTest](https://pytest.org/):
 
 ```
 pip install -r requirements-dev.txt
 pytest tests.py
-```
-
-# Contribute
-
-Clone the repository, install packages and setup git hooks:
-
-```
-pip install -r requirements-dev.txt
-git config core.hooksPath .githooks
 ```
