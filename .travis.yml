@@ -16,3 +16,4 @@ before_script:
 
 script:
   - pytest -x tests.py
+  - black --check .
