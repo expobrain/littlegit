@@ -4,7 +4,6 @@ from setuptools import setup
 
 from littlegit import __version__
 
-
 setup(
     name="littlegit",
     description="This is a little tiny wrapper around Git CLI",

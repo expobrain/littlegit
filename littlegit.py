@@ -1,7 +1,6 @@
-import subprocess
 import functools
 import logging
-
+import subprocess
 
 __version__ = "0.1.1"
 
