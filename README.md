@@ -1,4 +1,4 @@
-# Littlegit
+# Littlegit
 
 A very little Python wrapper around Git CLI.
 
@@ -45,7 +45,7 @@ origin/HEAD -> origin/master
 origin/master
 ```
 
-## Tests
+## Tests
 
 To run the unit tests install the development dependencies and then run [PyTest](https://pytest.org/):
 
