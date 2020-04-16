@@ -1,8 +1,10 @@
+from pathlib import Path
+from typing import Union
 import functools
 import logging
 import subprocess
 
-__version__ = "0.2.0b4"
+__version__ = "0.2.0b5"
 
 
 logger = logging.getLogger(__name__)
@@ -19,8 +21,8 @@ class GitError(Exception):
 
 
 class Git(object):
-    def __init__(self, working_dir):
-        self.working_dir = working_dir
+    def __init__(self, working_dir: Union[str, Path]):
+        self.working_dir = Path(working_dir)
 
     def __getattr__(self, attr):
         cmd = attr.replace("_", "-")
