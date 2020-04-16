@@ -59,7 +59,7 @@ class Git(object):
 
         try:
             output = subprocess.check_output(
-                cli_cmd, stderr=subprocess.STDOUT, cwd=self.working_dir
+                cli_cmd, stderr=subprocess.STDOUT, cwd=self.working_dir.as_posix()
             )
         except subprocess.CalledProcessError as e:
             logger.error("Exit code %d: %s'n%s", e.returncode, e, e.output)
@@ -68,4 +68,4 @@ class Git(object):
         return output.decode("utf8")
 
     def init(self, **kwds):
-        return self.__execute("init", self.working_dir, **kwds)
+        return self.__execute("init", self.working_dir.as_posix(), **kwds)

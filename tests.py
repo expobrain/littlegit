@@ -1,5 +1,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 import subprocess
 
 import pytest
@@ -15,6 +16,15 @@ def repo():
         subprocess.check_call(["git", "init", repo_path])
 
         yield Git(repo_path)
+
+
+@pytest.mark.parametrize("cast_fn", [str, Path])
+def test_init(cast_fn: Callable):
+    with TemporaryDirectory() as temp_dir:
+        repo_path = cast_fn(temp_dir)
+
+        repo = Git(repo_path)
+        repo.init()
 
 
 def test_build_cli_args_no_args(repo: Git):
