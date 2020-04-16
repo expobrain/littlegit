@@ -1,42 +1,45 @@
-from unittest import TestCase
-import os
-import shutil
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import subprocess
+
+import pytest
 
 from littlegit import Git
 
-TEST_REPO_DIR = os.path.join(os.path.dirname(__file__), "__test_repo__")
+
+@pytest.fixture()
+def repo():
+    with TemporaryDirectory() as temp_dir:
+        repo_path = Path(temp_dir)
+
+        subprocess.check_call(["git", "init", repo_path])
+
+        yield Git(repo_path)
 
 
-class GitTests(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        if os.path.exists(TEST_REPO_DIR):
-            shutil.rmtree(TEST_REPO_DIR)
+def test_build_cli_args_no_args(repo: Git):
+    assert repo.build_cli_args() == []
 
-        os.makedirs(TEST_REPO_DIR)
-        subprocess.check_call(["git", "init", TEST_REPO_DIR])
 
-    def setUp(self):
-        self.git = Git(TEST_REPO_DIR)
+def test_build_cli_args_short_arg(repo: Git):
+    assert repo.build_cli_args(v=True) == ["-v"]
 
-    def test_build_cli_args_no_args(self):
-        assert self.git.build_cli_args() == []
 
-    def test_build_cli_args_short_arg(self):
-        assert self.git.build_cli_args(v=True) == ["-v"]
+def test_build_cli_args_long_arg(repo: Git):
+    assert repo.build_cli_args(verbose=True) == ["--verbose"]
 
-    def test_build_cli_args_long_arg(self):
-        assert self.git.build_cli_args(verbose=True) == ["--verbose"]
 
-    def test_build_cli_args_short_arg_with_value(self):
-        assert self.git.build_cli_args(U=20) == ["-U20"]
+def test_build_cli_args_short_arg_with_value(repo: Git):
+    assert repo.build_cli_args(U=20) == ["-U20"]
 
-    def test_build_cli_args_long_arg_with_value(self):
-        assert self.git.build_cli_args(unified=20) == ["--unified=20"]
 
-    def test_build_cli_args_long_arg_with_null_value(self):
-        assert self.git.build_cli_args(unified=None) == []
+def test_build_cli_args_long_arg_with_value(repo: Git):
+    assert repo.build_cli_args(unified=20) == ["--unified=20"]
 
-    def test_build_cli_args_short_arg_without_value(self):
-        assert self.git.build_cli_args("-v") == ["-v"]
+
+def test_build_cli_args_long_arg_with_null_value(repo: Git):
+    assert repo.build_cli_args(unified=None) == []
+
+
+def test_build_cli_args_short_arg_without_value(repo: Git):
+    assert repo.build_cli_args("-v") == ["-v"]
