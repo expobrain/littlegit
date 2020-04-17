@@ -1,6 +1,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
+from typing import Callable, Dict, List
 import subprocess
 
 import pytest
@@ -27,33 +27,18 @@ def test_init(cast_fn: Callable):
         repo.init()
 
 
-def test_build_cli_args_no_args(repo: Git):
+@pytest.mark.parametrize(
+    "args, kwds, expected",
+    [
+        [[], {}, []],
+        [[], {"v": True}, ["-v"]],
+        [[], {"verbose": True}, ["--verbose"]],
+        [[], {"U": 20}, ["-U20"]],
+        [[], {"unified": 20}, ["--unified=20"]],
+        [[], {"unified": None}, []],
+        [[], {"_1": True}, ["-1"]],
+        [["HEAD"], {}, ["HEAD"]],
+    ],
+)
+def test_build_cli_args(repo: Git, args: List, kwds: Dict, expected: List[str]):
     assert repo.build_cli_args() == []
-
-
-def test_build_cli_args_short_arg(repo: Git):
-    assert repo.build_cli_args(v=True) == ["-v"]
-
-
-def test_build_cli_args_long_arg(repo: Git):
-    assert repo.build_cli_args(verbose=True) == ["--verbose"]
-
-
-def test_build_cli_args_short_arg_with_value(repo: Git):
-    assert repo.build_cli_args(U=20) == ["-U20"]
-
-
-def test_build_cli_args_long_arg_with_value(repo: Git):
-    assert repo.build_cli_args(unified=20) == ["--unified=20"]
-
-
-def test_build_cli_args_long_arg_with_null_value(repo: Git):
-    assert repo.build_cli_args(unified=None) == []
-
-
-def test_build_cli_args_short_arg_without_value(repo: Git):
-    assert repo.build_cli_args("-v") == ["-v"]
-
-
-def test_build_cli_args_short_arg_is_number(repo: Git):
-    assert repo.build_cli_args(_1=True) == ["-1"]
