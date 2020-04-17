@@ -4,7 +4,7 @@ import functools
 import logging
 import subprocess
 
-__version__ = "0.2.0b7"
+__version__ = "0.2.0b8"
 
 
 logger = logging.getLogger(__name__)
@@ -33,6 +33,9 @@ class Git(object):
         cli_args = []
 
         for k, v in kwds.items():
+            if k.startswith("_"):
+                k = k[1:]
+
             short_arg = len(k) == 1
 
             if short_arg:

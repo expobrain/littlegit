@@ -25,7 +25,11 @@ To use Littlegit is very simple, it follows a very simple rule to map Git's comm
 Lets explain this with an example of initialising a local repository, adding a file and commiting:
 
 ```python
-repo = Git("/my/local/repo")
+from pathlib import Path
+
+from littlegit import Git
+
+repo = Git(Path("/my/local/repo"))
 repo.init()  # git init /my/local/repo
 
 open("myfile", "w").close()
@@ -34,6 +38,7 @@ repo.add("myfile")  # git add myfile
 repo.commit(message="this is my first commit")  # git commit --message "this is my first commit"
 repo.remote("add", "origin", "<my_remote_repo>")  # git remote add origin <my_remote_repo>
 repo.push("origin", "master")  # git push origin master
+print(repo.log(_1=True))  # get only the last log message
 ```
 
 All the methods return the output if the Git command:

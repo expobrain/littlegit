@@ -53,3 +53,7 @@ def test_build_cli_args_long_arg_with_null_value(repo: Git):
 
 def test_build_cli_args_short_arg_without_value(repo: Git):
     assert repo.build_cli_args("-v") == ["-v"]
+
+
+def test_build_cli_args_short_arg_is_number(repo: Git):
+    assert repo.build_cli_args(_1=True) == ["-1"]
