@@ -33,6 +33,9 @@ class Git(object):
         cli_args = []
 
         for k, v in kwds.items():
+            if k.startswith("_"):
+                k = k[1:]
+
             short_arg = len(k) == 1
 
             if short_arg:

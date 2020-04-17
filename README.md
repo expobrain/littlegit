@@ -34,6 +34,7 @@ repo.add("myfile")  # git add myfile
 repo.commit(message="this is my first commit")  # git commit --message "this is my first commit"
 repo.remote("add", "origin", "<my_remote_repo>")  # git remote add origin <my_remote_repo>
 repo.push("origin", "master")  # git push origin master
+print(repo.log(_1=True))  # get only the last log message
 ```
 
 All the methods return the output if the Git command:
