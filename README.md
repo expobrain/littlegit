@@ -25,7 +25,11 @@ To use Littlegit is very simple, it follows a very simple rule to map Git's comm
 Lets explain this with an example of initialising a local repository, adding a file and commiting:
 
 ```python
-repo = Git("/my/local/repo")
+from pathlib import Path
+
+from littlegit import Git
+
+repo = Git(Path("/my/local/repo"))
 repo.init()  # git init /my/local/repo
 
 open("myfile", "w").close()
