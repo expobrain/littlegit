@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Union
+from typing import List, Union
 import functools
 import logging
 import subprocess
@@ -29,7 +29,7 @@ class Git(object):
 
         return functools.partial(self.__execute, cmd)
 
-    def build_cli_args(self, *args, **kwds):
+    def build_cli_args(self, *args, **kwds) -> List[str]:
         cli_args = []
 
         for k, v in kwds.items():
@@ -44,17 +44,16 @@ class Git(object):
                 cli_args.append(arg)
             elif v:
                 if short_arg:
-                    cli_args.append("{}{}".format(arg, v))
+                    cli_args.append(f"{arg}{v}")
                 else:
-                    cli_args.append("{}={}".format(arg, v))
+                    cli_args.append(f"{arg}={v}")
 
-        cli_args.extend(args)
+        cli_args += [str(a) for a in args]
 
         return cli_args
 
     def __execute(self, cmd, *args, **kwds):
         cli_cmd = ["git", cmd] + self.build_cli_args(*args, **kwds)
-        cli_cmd = [str(e) for e in cli_cmd]
 
         logger.info(" ".join(cli_cmd))
 
