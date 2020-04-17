@@ -4,7 +4,7 @@ import functools
 import logging
 import subprocess
 
-__version__ = "0.2.0b8"
+__version__ = "0.2.0"
 
 
 logger = logging.getLogger(__name__)
