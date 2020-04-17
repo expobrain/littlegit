@@ -54,6 +54,7 @@ class Git(object):
 
     def __execute(self, cmd, *args, **kwds):
         cli_cmd = ["git", cmd] + self.build_cli_args(*args, **kwds)
+        cli_cmd = [str(e) for e in cli_cmd]
 
         logger.info(" ".join(cli_cmd))
 
