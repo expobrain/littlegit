@@ -3,9 +3,42 @@ line-length = 99
 target-version = ["py36", "py37", "py38"]
 exclude = '''
 /(
-    \.git
+    .git|venv|.venv
 )/
 '''
 
 [tool.isort]
-from_first = true
+profile = "black"
+float_to_top = true
+line_length = 79
+skip_glob = ".venv,venv"
+
+[tool.poetry]
+name = "littlegit"
+version = "0.1.0"
+description = "This is a little tiny wrapper around Git CLI"
+authors = ["Daniele Esposti <daniele.esposti@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "License :: Public Domain",
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "Topic :: System",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries",
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+isort = "^4.3.21"
+pytest = "^5.4.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
