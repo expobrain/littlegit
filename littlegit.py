@@ -19,7 +19,7 @@ class GitError(Exception):
         self.exit_code = exit_code
 
 
-class Git(object):
+class Git:
     def __init__(self, working_dir: Union[str, Path]):
         self.working_dir = Path(working_dir)
 
@@ -38,7 +38,7 @@ class Git(object):
             short_arg = len(k) == 1
 
             if short_arg:
-                arg = "-{}".format(k)
+                arg = f"-{k}"
             else:
                 arg = "--{}".format(k.replace("_", "-"))
 
