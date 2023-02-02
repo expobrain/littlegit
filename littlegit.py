@@ -1,8 +1,8 @@
-from pathlib import Path
-from typing import List, Union
 import functools
 import logging
 import subprocess
+from pathlib import Path
+from typing import List, Union
 
 __version__ = "0.2.0"
 
@@ -11,7 +11,6 @@ logger = logging.getLogger(__name__)
 
 
 class GitError(Exception):
-
     __slots__ = ["cli_args", "output", "exit_code"]
 
     def __init__(self, cli_args, output, exit_code):
