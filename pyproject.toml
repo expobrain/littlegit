@@ -34,7 +34,7 @@ classifiers = [
 python = "^3.7,<3.12"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.981"
+mypy = "^1.0"
 pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
 pytest-testmon = "^1.4.1"
