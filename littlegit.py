@@ -2,7 +2,7 @@ import functools
 import logging
 import subprocess
 from pathlib import Path
-from typing import List, Union
+from typing import Union
 
 __version__ = "0.2.0"
 
@@ -28,7 +28,7 @@ class Git:
 
         return functools.partial(self.__execute, cmd)
 
-    def build_cli_args(self, *args, **kwds) -> List[str]:
+    def build_cli_args(self, *args, **kwds) -> list[str]:
         cli_args = []
 
         for k, v in kwds.items():
