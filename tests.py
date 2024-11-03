@@ -1,7 +1,7 @@
 import subprocess
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable, Dict, List
+from typing import Callable
 
 import pytest
 
@@ -40,5 +40,5 @@ def test_init(cast_fn: Callable):
         [["HEAD"], {}, ["HEAD"]],
     ],
 )
-def test_build_cli_args(repo: Git, args: List, kwds: Dict, expected: List[str]):
+def test_build_cli_args(repo: Git, args: list, kwds: dict, expected: list[str]):
     assert repo.build_cli_args() == []

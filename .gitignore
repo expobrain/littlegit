@@ -94,3 +94,6 @@ ENV/
 
 # Venv
 .venv
+
+# testmon
+.testmondata*

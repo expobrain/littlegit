@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 99
-target-version = ["py37", "py38", "py39", "py310", "py311"]
+target-version = ["py39", "py310", "py311", "py312", "py313"]
 exclude = '''
 /(
     .git|.venv
@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7,<3.12"
+python = "^3.9"
 
 [tool.poetry.dev-dependencies]
 mypy = "^1.4"
